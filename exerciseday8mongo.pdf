@@ -1,0 +1,46 @@
+Before you start go to this link https://www.giraffeacademy.com/databases/mongodb/aggregation/
+
+Watch this video 
+https://www.youtube.com/watch?v=Kk6Er0c7srU
+Exercise #1
+Open the mongo shell .
+
+
+
+Exercise #2
+Create a database called taxes.
+
+use taxes
+
+
+
+Exercise #3
+Create a collection called canada_tax_rates 
+The schema must allow the following:
+{
+       "Code": "AB",
+       "Name": "Alberta",
+       "Taxes": [
+           {
+               "Code": "GST",
+               "Name": "Goods and Services Tax",
+               "Type": "federal",
+               "Tax": 0.05
+           }
+       ]
+ }
+
+Exercise #4
+Insert the data from the canada_tax_rates.json into the database
+
+
+
+Exercise #5
+Verify the data was entered properly
+Exercise #6
+Create a query that verifies the estimated combined tax rate for each province
+Exercise #7
+Salvi owns a dealership in Quebec and he just got his first customer. He is trying to figure out how much taxes he has to charge for a C$518,805 Lamborghini Aventador.
+Exercise #8
+If I buy a t-shirt online in the province of Saskatchewan for C$123.25 how much did I pay in taxes.
+

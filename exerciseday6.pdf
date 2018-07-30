@@ -1,0 +1,63 @@
+Solve the following exercises in mode analytics
+https://modeanalytics.com
+Exercise #1
+Download the WHOLE benn.advanced_country_debt_indicators table from mode analytics.
+Exercise #2
+Create a new DB named countries in your local mysql instance.
+Exercise #3
+Create a new table named country_debt with an adequate structure for the data in step 1
+Exercise #4
+Load the data from step 1 into the table you created on step 3:
+
+WINDOWS (\)
+LOAD DATA LOCAL INFILE 'path\to\file\data.csv' INTO TABLE country_debt FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES;
+MAC (to get the file path press right click and then press option)
+LOAD DATA LOCAL INFILE 'path_to_file/data.csv' INTO TABLE country_debt FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES;
+
+Exercise #5
+Create a query that selects the average gdp growth for each country between the years 1990 and 2000. 
+Show country name and gdp growth.
+
+ SELECT country, AVG(gdp_growth) AS 'growth' FROM country_debt WHERE year BETWEEN 1990 AND 2000 GROUP BY country ORDER BY 'growth' DESC;
+
+
+Exercise #6
+Export your query to a file named NinetiesGDP.csv - use commas to separate the values and quotes to enclose each field.
+
+
+SELECT country, AVG(gdp_growth) AS 'growth' FROM country_debt WHERE year BETWEEN 1990 AND 2000 GROUP BY country ORDER BY 'growth' DESC INTO OUTFILE'avg.growth.by.country' FIELDS TERMINATED BY ','LINES TERMINATED BY '\r\n';
+
+Exercise #7
+Create a query that sorts countries by historically highest GDP growth. Show country and GDP growth,
+ and show only 20 results. Take all available yearly data into account. Export this query to a file named top20GDP.csv
+
+SELECT country, SUM(gdp_growth) AS 'growth' FROM country_debt GROUP BY country ORDER BY growth DESC LIMIT 20 INTO OUTFILE 'top20GDP.csv' FIELDS TERMINATED BY ','LINES TERMINATED BY '\r\n';
+
+Exercise #8
+Which was the country with the largest debt public debt in 1999?
+
+SELECT country, MAX(public_debt) AS 'most debt' FROM country_debt WHERE year=1999;
+
+Exercise #9
+Which are the ten countries with the highest historical debt to gdp ratio?
+
+SELECT country, SUM(public_debt)/SUM(gdp_growth) AS 'ratio' FROM country_debt GROUP BY country ORDER BY 'ratio' DESC LIMIT 10;
+
+Exercise #10
+Which was the country with the lowest GDP growth in 2008?
+Sql Unions. Rules for appending data:
+Both tables must have the same number of columns
+The columns must have the same data types in the same order as the first table
+Example: 
+Exercise #11
+Write a query that appends the two crunchbase_investments datasets above (including duplicate values). Filter the first dataset to only companies with names that start with the letter "T", and filter the second to companies names starting with "M" (both not case-sensitive). Only include the company_permalink, company_name, and investor_name columns.
+Hardcoded constants: You can add a hardcoded column by saying something like:
+select 'hardcoded value' as val, name
+from table
+Exercise #12
+You were asked by your boss to produce a query which can help him visualize how company investments change over time. Assume that the tutorial.crunchbase_investments_part1 and part2 tables are from different time periods. Write a query that shows 4 columns. The first indicates which dataset (part 1 or 2) the data comes from, the second is the company permalink, the third shows company status, and the fourth is a sum of the amount of money invested into the company. Hint: you will have to use the tutorial.crunchbase_companies table as well as the investments tables (tutorial.crunchbase_investments_part1 and part2).
+Exercise #13
+Write a query that shows 4 columns. The first is the company permalink, then company name, status, and number of investors. Make sure all companies are included. Similar to the above problem, but both data sets are lumped together now. Students should attempt to join the companies table to the union of the investments tables.
+Find out how many investments have been made into companies which are currently closed, acquired, ipo, or operating. These are possible statuses. Ignore companies with no known status.
+Exercise #14
+The next query requires you to use the following tables: derek.videogame_weekly_sales_2013_2014, derek.videogame_weekly_sales_2010, derek.videogame_weekly_sales_2011, derek.videogame_weekly_sales_2012. Show the highest grossing video games sold in the spans between 2010 and 2014, adding up xbox and ps3 sales. The tables are derek.videogame_weekly_sales_2013_2014, derek.videogame_global_weekly_sales_2010, derek.videogame_global_weekly_sales_2011, and derek.videogame_global_weekly_sales_2012
